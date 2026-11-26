@@ -44,21 +44,27 @@ def iniciar_rag():
     #3.1. CARREGAMENTO DO DOCUMENTO PDF
 
     # Cria o carregador do arquivo PDF
-    carregador = PyPDFLoader("bula_dapagliflozina.pdf", 
-                             "bula_empagliflozina.pdf", 
-                             "bula_glibenclamida.pdf", 
-                             "bula_gliclazida.pdf", 
-                             "bula_glifage.pdf", 
-                             "bula_glifagexr.pdf", 
-                             "bula_glimepirida.pdf", 
-                             "bula_InsulinaHumana_NovolinN.pdf", 
-                             "bula_InsulinaHumanaRegular.pdf", 
-                             "bula_Januvia.pdf", 
-                             "bula_LANTUS_insulina_glargina.pdf", 
-                             "bula_Mounjaro.pdf")
+    # Lista com todos os arquivos PDF
+    arquivos_pdf = [
+        "bula_dapagliflozina.pdf",
+        "bula_empagliflozina.pdf",
+        "bula_glibenclamida.pdf",
+        "bula_gliclazida.pdf",
+        "bula_glifage.pdf",
+        "bula_glifagexr.pdf",
+        "bula_glimepirida.pdf",
+        "bula_InsulinaHumana_NovolinN.pdf",
+        "bula_InsulinaHumanaRegular.pdf",
+        "bula_Januvia.pdf",
+        "bula_LANTUS_insulina_glargina.pdf",
+        "bula_Mounjaro.pdf"
+]
 
-    # Lê o PDF e transforma seu conteúdo em objetos Document
-    documentos = carregador.load()
+# Lê os PDFs e transforma seu conteúdo em objetos Document
+    documentos = []
+    for arquivo in arquivos_pdf:
+        carregador = PyPDFLoader(arquivo)
+        documentos.extend(carregador.load())
 
     # Exibe a quantidade de páginas carregadas
     #st.write("Quantidade de páginas carregadas:", len(documentos))
